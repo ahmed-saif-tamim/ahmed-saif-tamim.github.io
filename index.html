@@ -21,7 +21,7 @@
                         cursive: ['Playfair Display', 'serif'], // Fallback for the cursive font used
                     },
                     animation: {
-                        'pulse-slow': 'pulse 20s infinite alternate',
+                        //
                     }
                 }
             }
@@ -93,9 +93,6 @@
 
         <div class="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
             <div class="fade-in-section w-full delay-100">
-                <div class="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-blue-100 text-sm font-medium tracking-wider uppercase">
-                    <i data-lucide="beaker" size="14"></i> Innovating Healthcare
-                </div>
                 <h1 id="hero-greeting" class="text-5xl md:text-8xl font-serif font-bold text-white leading-tight mb-2 drop-shadow-2xl">
                     </h1>
                 <p id="hero-sub" class="font-cursive text-3xl md:text-4xl text-blue-200 mb-8 opacity-90">
@@ -337,7 +334,6 @@
                 title: "RESEARCHER | WRITER | READER",
                 greeting: "Hello! This is Ahmed Saif",
                 subGreeting: "You're Welcome!",
-                location: "Rajshahi, Bangladesh",
                 email: "ahmedsaif@example.com", 
                 socials: {
                     linkedin: "#",
@@ -347,8 +343,8 @@
                 }
             },
             images: {
-                heroBackground: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop",
-                aboutPortrait: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop",
+                heroBackground: "https://lh3.googleusercontent.com/d/1Y9Zj6fs-nc5thGCiSo_T4TTBIQzJPXBK",
+                aboutPortrait: "https://lh3.googleusercontent.com/d/19oPJJ8-mLrbvAGDQmbbKMnE0ihxrxqiQ",
                 skillsBackground: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
                 gallery: [
                     "https://images.unsplash.com/photo-1581093458891-2f308909ee39?q=80&w=1000&auto=format&fit=crop", 
@@ -357,43 +353,50 @@
                     "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1000&auto=format&fit=crop"  
                 ]
             },
-            education: [
-                {
-                    degree: "Masters in Pharmacy",
-                    period: "2024 - Present",
-                    institution: "University of Rajshahi, Bangladesh",
-                    description: "Specializing in Pharmaceutical Sciences and Bioinformatics.",
-                    logo: "https://upload.wikimedia.org/wikipedia/en/2/23/University_of_Rajshahi_emblem.svg" 
-                },
-                {
-                    degree: "Bachelor in Pharmacy",
-                    period: "2019 - 2024",
-                    institution: "University of Rajshahi, Bangladesh",
-                    description: "Graduated with honors. Foundation in wet lab techniques and drug discovery.",
-                    logo: "https://upload.wikimedia.org/wikipedia/en/2/23/University_of_Rajshahi_emblem.svg"
-                }
-            ],
+education: [
+  {
+    degree: "PhD in Biological Sciences",
+    period: "2026 - Present",
+    institution: "UNC Charlotte, USA",
+    description: "Doctoral research focused on chromatin biology, Polycomb group complexes, and epigenetic memory using genomics, imaging, and computational approaches.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/57/UNC_Charlotte_Main_Horizontal.png"
+  },
+  {
+    degree: "Masters in Pharmacy",
+    period: "2024 - Present",
+    institution: "University of Rajshahi, Bangladesh",
+    description: "Specializing in Pharmaceutical Sciences and Bioinformatics.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Rajshahi_University_update_logo.png"
+  },
+  {
+    degree: "Bachelor in Pharmacy",
+    period: "2019 - 2024",
+    institution: "University of Rajshahi, Bangladesh",
+    description: "Graduated with honors. Foundation in wet lab techniques and drug discovery.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Rajshahi_University_update_logo.png"
+  }
+],
             experience: [
                 {
-                    role: "Research Assistant",
-                    lab: "Bioinformatics Laboratory",
-                    institution: "University of Rajshahi",
-                    supervisor: "Dr. Md. Nurul Haque Mollah",
-                    period: "April 2024 - Present"
-                },
-                {
-                    role: "Research Assistant",
-                    lab: "CHIRAL-Bangladesh",
-                    institution: "Center for Health Innovation",
-                    supervisor: "Md. Jubayer Hossain",
-                    period: "Jan 2024 - Present"
+                    role: "Graduate Research Assistant",
+                    lab: "Ren Laboratory, Department of Biological Sciences",
+                    institution: "University of North Carolina at Charlotte",
+                    supervisor: "Dr. Xiaojun Ren",
+                    period: "August 2025 - Present"
                 },
                 {
                     role: "Research Assistant",
                     lab: "Biological Research on the Brain (BRB)",
                     institution: "Neuroscience Research",
                     supervisor: "Dr. Md. Obayed Raihan",
-                    period: "Oct 2023 - Present"
+                    period: "Oct 2023 - August 2025"
+                },
+                {
+                    role: "Research Assistant",
+                    lab: "Bioinformatics Laboratory",
+                    institution: "University of Rajshahi",
+                    supervisor: "Dr. Md. Nurul Haque Mollah",
+                    period: "April 2024 - August 2025"
                 }
             ],
             skills: {
@@ -496,7 +499,7 @@
         function initContent() {
             // Hero
             document.getElementById('hero-bg').src = PORTFOLIO_DATA.images.heroBackground;
-            document.getElementById('hero-greeting').innerText = PORTFOLIO_DATA.personal.greeting.split("Hello! This is ")[1];
+            document.getElementById('hero-greeting').innerText = PORTFOLIO_DATA.personal.name;
             document.getElementById('hero-sub').innerText = PORTFOLIO_DATA.personal.subGreeting;
 
             // About
@@ -508,7 +511,7 @@
             document.getElementById('socials-container').innerHTML = socialHtml;
             document.getElementById('contact-btn').href = `mailto:${PORTFOLIO_DATA.personal.email}`;
             document.getElementById('about-img').src = PORTFOLIO_DATA.images.aboutPortrait;
-            document.getElementById('location-text').innerText = PORTFOLIO_DATA.personal.location;
+            document.getElementById('location-text').innerText = PORTFOLIO_DATA.personal.location || "";
 
             // Education
             document.getElementById('education-list').innerHTML = PORTFOLIO_DATA.education.map((edu, idx) => `
@@ -741,4 +744,5 @@
 
     </script>
 </body>
+
 </html>
