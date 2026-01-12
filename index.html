@@ -48,17 +48,20 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* iPhone Safe Area for Bottom Nav */
+    /* iPhone Safe Area */
     .pb-safe {
       padding-bottom: env(safe-area-inset-bottom);
+    }
+    .pt-safe {
+      padding-top: env(safe-area-inset-top);
     }
   </style>
 </head>
 
-<body class="font-sans antialiased text-slate-800 selection:bg-blue-200 selection:text-blue-900 bg-slate-50 pb-24 md:pb-0">
+<body class="font-sans antialiased text-slate-800 selection:bg-blue-200 selection:text-blue-900 bg-slate-50 pt-16 md:pt-0 pb-0">
 
-  <!-- NAV -->
-  <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-4 md:py-6 bg-transparent">
+  <!-- NAV (Desktop Only) -->
+  <nav id="navbar" class="hidden md:block fixed w-full z-50 transition-all duration-500 py-4 md:py-6 bg-transparent">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center text-white">
       <a href="#" class="text-xl md:text-2xl font-bold tracking-widest font-serif border-2 border-white px-3 py-1 hover:bg-white hover:text-slate-900 transition-colors duration-300">
         AS
@@ -74,7 +77,7 @@
         <a href="#research" class="hover:text-blue-400 transition-colors relative group">Research<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span></a>
       </div>
 
-      <!-- Mobile Menu Button (Hidden in favor of Bottom Nav) -->
+      <!-- Mobile Menu Button (Hidden in favor of Top Nav) -->
       <button id="mobile-menu-btn" class="hidden text-white">
         <i data-lucide="menu" width="28" height="28"></i>
       </button>
@@ -82,22 +85,22 @@
   </nav>
 
   <!-- HERO -->
-  <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+  <section id="home" class="relative h-[50vh] md:h-screen flex items-center justify-center overflow-hidden bg-slate-900">
     <div class="absolute inset-0 z-0">
-      <!-- Removed scale-105 on mobile to show more image, kept for desktop -->
-      <img id="hero-bg" src="" alt="Hero Background" class="w-full h-full object-cover scale-100 md:scale-105 transition-transform duration-1000">
-      <div class="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/20 to-slate-900/90"></div>
+      <!-- Changed mobile image sizing to contain so it fits without cropping -->
+      <img id="hero-bg" src="" alt="Hero Background" class="w-full h-full object-contain object-bottom md:object-cover md:scale-105 transition-transform duration-1000">
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-900/10 via-transparent to-slate-900/90"></div>
     </div>
 
-    <div class="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
+    <div class="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center justify-end md:justify-center h-full pb-8 md:pb-0">
       <div class="fade-in-section w-full delay-100">
         <!-- Reduced font sizes significantly for mobile -->
-        <h1 id="hero-greeting" class="text-4xl md:text-8xl font-serif font-bold text-white leading-tight mb-2 drop-shadow-2xl"></h1>
-        <p id="hero-sub" class="font-cursive text-xl md:text-4xl text-blue-200 mb-8 opacity-90"></p>
+        <h1 id="hero-greeting" class="text-3xl md:text-8xl font-serif font-bold text-white leading-tight mb-2 drop-shadow-2xl"></h1>
+        <p id="hero-sub" class="font-cursive text-lg md:text-4xl text-blue-200 mb-4 md:mb-8 opacity-90"></p>
       </div>
 
       <div class="fade-in-section delay-300">
-        <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-xs md:text-sm font-bold tracking-[0.2em] text-white/90">
+        <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-[10px] md:text-sm font-bold tracking-[0.2em] text-white/90">
           <span>RESEARCHER</span>
           <span class="hidden md:inline w-1.5 h-1.5 rounded-full bg-blue-500"></span>
           <span>WRITER</span>
@@ -106,7 +109,7 @@
         </div>
       </div>
 
-      <div class="fade-in-section delay-500">
+      <div class="fade-in-section delay-500 hidden md:block">
         <!-- Reduced margin top for mobile -->
         <div class="mt-8 md:mt-16 animate-bounce text-white/50">
           <i data-lucide="chevron-down" class="w-6 h-6 md:w-8 md:h-8"></i>
@@ -373,19 +376,27 @@
   </div>
 
   <!-- MOBILE NAVIGATION (MOVED TO TOP) -->
-  <nav class="fixed top-0 left-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 md:hidden transition-all duration-300 shadow-[0_5px_15px_rgba(0,0,0,0.05)]">
+  <nav class="fixed top-0 left-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 md:hidden pt-safe transition-all duration-300 shadow-[0_5px_15px_rgba(0,0,0,0.05)]">
+    <div class="grid grid-cols-5 h-14 items-center">
+      <a href="#home" class="inline-flex flex-col items-center justify-center h-full hover:bg-slate-50 active:bg-slate-100 group transition-colors">
+        <i data-lucide="home" class="w-4 h-4 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
+        <span class="text-[9px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">Home</span>
+      </a>
+      <a href="#about" class="inline-flex flex-col items-center justify-center h-full hover:bg-slate-50 active:bg-slate-100 group transition-colors">
+        <i data-lucide="user" class="w-4 h-4 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
+        <span class="text-[9px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">About</span>
       </a>
       <a href="#experience" class="inline-flex flex-col items-center justify-center h-full hover:bg-slate-50 active:bg-slate-100 group transition-colors">
-        <i data-lucide="briefcase" class="w-5 h-5 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
-        <span class="text-[10px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">Exp</span>
+        <i data-lucide="briefcase" class="w-4 h-4 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
+        <span class="text-[9px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">Exp</span>
       </a>
       <a href="#research" class="inline-flex flex-col items-center justify-center h-full hover:bg-slate-50 active:bg-slate-100 group transition-colors">
-        <i data-lucide="microscope" class="w-5 h-5 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
-        <span class="text-[10px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">Rsrch</span>
+        <i data-lucide="microscope" class="w-4 h-4 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
+        <span class="text-[9px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">Rsrch</span>
       </a>
       <a href="#contact" class="inline-flex flex-col items-center justify-center h-full hover:bg-slate-50 active:bg-slate-100 group transition-colors">
-        <i data-lucide="mail" class="w-5 h-5 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
-        <span class="text-[10px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">Contact</span>
+        <i data-lucide="mail" class="w-4 h-4 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
+        <span class="text-[9px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">Contact</span>
       </a>
     </div>
   </nav>
