@@ -364,16 +364,16 @@
     </div>
   </footer>
 
-  <!-- MOBILE BOTTOM NAVIGATION (New Code for Mobile) -->
-  <nav class="fixed bottom-0 left-0 z-50 w-full bg-white/95 backdrop-blur-md border-t border-slate-200 md:hidden pb-safe transition-all duration-300 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
-    <div class="grid grid-cols-5 h-16 items-center">
-      <a href="#home" class="inline-flex flex-col items-center justify-center h-full hover:bg-slate-50 active:bg-slate-100 group transition-colors">
-        <i data-lucide="home" class="w-5 h-5 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
-        <span class="text-[10px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">Home</span>
-      </a>
-      <a href="#about" class="inline-flex flex-col items-center justify-center h-full hover:bg-slate-50 active:bg-slate-100 group transition-colors">
-        <i data-lucide="user" class="w-5 h-5 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
-        <span class="text-[10px] font-bold uppercase tracking-wide text-slate-400 group-hover:text-blue-600 transition-colors">About</span>
+  <!-- IMAGE MODAL (Hidden by default) -->
+  <div id="image-modal" class="fixed inset-0 z-[60] hidden bg-slate-950/95 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="closeModal()">
+    <button class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors bg-black/20 p-2 rounded-full backdrop-blur-md">
+      <i data-lucide="x" width="32" height="32"></i>
+    </button>
+    <img id="modal-img" src="" alt="Full View" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
+  </div>
+
+  <!-- MOBILE NAVIGATION (MOVED TO TOP) -->
+  <nav class="fixed top-0 left-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 md:hidden transition-all duration-300 shadow-[0_5px_15px_rgba(0,0,0,0.05)]">
       </a>
       <a href="#experience" class="inline-flex flex-col items-center justify-center h-full hover:bg-slate-50 active:bg-slate-100 group transition-colors">
         <i data-lucide="briefcase" class="w-5 h-5 mb-1 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
@@ -835,10 +835,10 @@
 
       // Gallery
       document.getElementById('gallery-list').innerHTML = PORTFOLIO_DATA.images.gallery.map((img, idx) => `
-        <div class="fade-in-section relative group overflow-hidden rounded-2xl aspect-square cursor-pointer shadow-md" style="transition-delay: ${idx * 100}ms">
+        <div onclick="openModal('${img}')" class="fade-in-section relative group overflow-hidden rounded-xl md:rounded-2xl aspect-square cursor-pointer shadow-md" style="transition-delay: ${idx * 100}ms">
           <img src="${img}" alt="Gallery" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-blue-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <i data-lucide="microscope" class="text-white drop-shadow-lg" size="40"></i>
+            <i data-lucide="zoom-in" class="text-white drop-shadow-lg" size="32"></i>
           </div>
         </div>
       `).join('');
@@ -886,6 +886,38 @@
       }, { threshold: 0.1 });
 
       document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    }
+
+    // Modal Functions
+    function openModal(imageSrc) {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('modal-img');
+      
+      img.src = imageSrc;
+      modal.classList.remove('hidden');
+      // Small timeout to allow display:block to apply before adding opacity for transition
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        img.classList.remove('scale-95');
+        img.classList.add('scale-100');
+      }, 10);
+      
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('modal-img');
+      
+      modal.classList.add('opacity-0');
+      img.classList.remove('scale-100');
+      img.classList.add('scale-95');
+      
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        img.src = ''; // Clear source to stop holding memory
+        document.body.style.overflow = ''; // Restore scrolling
+      }, 300);
     }
 
     // Simple Contact Form Handling
