@@ -87,8 +87,8 @@
   <!-- HERO -->
   <section id="home" class="relative h-[50vh] md:h-screen flex items-center justify-center overflow-hidden bg-slate-900">
     <div class="absolute inset-0 z-0">
-      <!-- Changed mobile image sizing to contain so it fits without cropping -->
-      <img id="hero-bg" src="" alt="Hero Background" class="w-full h-full object-contain object-bottom md:object-cover md:scale-105 transition-transform duration-1000">
+      <!-- Added scale-125 origin-bottom for mobile zoom, maintained md settings -->
+      <img id="hero-bg" src="" alt="Hero Background" class="w-full h-full object-contain object-bottom scale-125 origin-bottom md:origin-center md:object-cover md:object-center md:scale-105 transition-transform duration-1000">
       <div class="absolute inset-0 bg-gradient-to-b from-slate-900/10 via-transparent to-slate-900/90"></div>
     </div>
 
@@ -813,6 +813,7 @@
         <div class="max-w-4xl w-full fade-in-section bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 group hover:shadow-2xl transition-all duration-500" style="transition-delay: ${idx * 150}ms">
           <div class="flex flex-col md:flex-row">
             <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
+               <!-- Reverted back to object-cover for full fill as requested -->
                <img src="${mentor.image}" alt="${mentor.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent md:bg-gradient-to-r md:from-transparent md:to-slate-900/10 mix-blend-multiply"></div>
             </div>
